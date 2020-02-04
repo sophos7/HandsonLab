@@ -8,21 +8,19 @@ import retrofit2.http.*
 interface HttpBinAPI {
 
     @GET("/get")
-    fun getButton(): Deferred<Response<ResponseBody>>
+    fun getButton(): Deferred<Response<String>>
 
     @POST("/post")
-    fun postButton(@Body body: PostBody): Deferred<Response<ResponseBody>>
+    fun postButton(@Body body: PostBody): Deferred<Response<String>>
 
     @PUT("/put")
-    fun putButton(@Body body: PostBody): Deferred<Response<ResponseBody>>
+    fun putButton(@Body body: PostBody): Deferred<Response<String>>
 
     @DELETE("/delete")
-    fun deleteButton(): Deferred<Response<ResponseBody>>
+    fun deleteButton(): Deferred<Response<String>>
 
     @GET("/stream/1")
     fun downloadButton(): Deferred<Response<ResponseBody>>
-
-
 }
 
-data class PostBody(val name:String = "morpheus", val job:String = "leader")
+data class PostBody(var name:String = "morpheus", var job:String = "leader")
