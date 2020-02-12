@@ -20,7 +20,10 @@ interface HttpBinAPI {
     fun deleteButton(): Deferred<Response<String>>
 
     @GET("/stream/1")
-    fun downloadButton(): Deferred<Response<ResponseBody>>
+    fun downloadButton(): Deferred<Response<String>>
+
+    @GET("/status/418")
+    fun errorButton(): Deferred<Response<String>>
 }
 
 data class PostBody(var name:String = "morpheus", var job:String = "leader")
