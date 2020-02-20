@@ -91,11 +91,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
 
         val num1 = 0
-        val num2 = 42
-        var result = 0
+        val num2 = 42œ
 
         try {
-            result = num2 / num1
+            num2 / num1
 
         } catch (e: Exception) {
             val attributesMap = mapOf<String, Any>(Pair("num1",num1),Pair("num2",num2))
