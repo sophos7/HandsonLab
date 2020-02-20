@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
 
         val num1 = 0
-        val num2 = 42œ
+        val num2 = 42
 
         try {
             num2 / num1
