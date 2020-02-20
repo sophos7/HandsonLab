@@ -1,11 +1,9 @@
 package com.example.hands_onlab
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import kotlin.coroutines.CoroutineContext
+
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
     private var job: Job = Job()
@@ -90,5 +89,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val response = service.errorButton().await()
         responseText.text = "Error Response : \n${response.errorBody()?.string() ?: "there is no errorBody string"}"
         Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
+
+        val num1 = 0
+        val num2 = 42
+        var result = 0
+
+        try {
+            result = num2 / num1
+
+        } catch (e: Exception) {
+            Toast.makeText(this, "num1: " + num1 + " num2: " + num2, Toast.LENGTH_SHORT).show()
+        }
     }
 }
