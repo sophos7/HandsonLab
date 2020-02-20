@@ -19,7 +19,7 @@ interface HttpBinAPI {
     @DELETE("/delete")
     fun deleteButton(): Deferred<Response<String>>
 
-    @GET("/stream/1")
+    @GET("/json")
     fun downloadButton(): Deferred<Response<String>>
 
     @GET("/status/418")

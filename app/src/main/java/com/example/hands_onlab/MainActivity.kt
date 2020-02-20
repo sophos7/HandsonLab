@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private suspend fun errorButton(){
         val response = service.errorButton().await()
-        responseText.text = "Error Response : \n${response.errorBody()!!.string()}"
+        responseText.text = "Error Response : \n${response.errorBody()?.string() ?: "there is no errorBody string"}"
         Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
     }
 }
