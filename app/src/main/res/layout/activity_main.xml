@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="DELETE"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/postButton" />
 
     <Button
@@ -52,9 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="DOWNLOAD"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+        app:layout_constraintTop_toBottomOf="@+id/putButton" />
 
     <TextView
         android:id="@+id/responseText"
@@ -77,6 +77,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
+
+    <Button
+        android:id="@+id/errorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HTTP ERROR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

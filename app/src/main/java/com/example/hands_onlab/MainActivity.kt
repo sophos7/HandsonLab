@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         putButton.setOnClickListener { launch { putButton() } }
         deleteButton.setOnClickListener { launch { deleteButton() } }
         downloadButton.setOnClickListener { launch { downloadButton() } }
+        errorButton.setOnClickListener { launch { errorButton() } }
     }
 
     override fun onDestroy() {
@@ -83,5 +84,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val response = service.downloadButton().await()
         responseText.text = "Download Response :\n${response.body()}"
         Toast.makeText(this, "Download Button clicked", Toast.LENGTH_SHORT).show()
+    }
+
+    private suspend fun errorButton(){
+        val response = service.errorButton().await()
+        responseText.text = "Error Response : \n${response.errorBody()?.string() ?: "there is no errorBody string"}"
+        Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
     }
 }
