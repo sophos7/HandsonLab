@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val num2 = 42
 
         try {
-            num2 / num1
+            val result = num2 / num1
 
         } catch (e: Exception) {
             val attributesMap = mapOf<String, Any>(Pair("num1",num1),Pair("num2",num2))
