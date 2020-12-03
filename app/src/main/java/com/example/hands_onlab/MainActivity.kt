@@ -32,9 +32,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         retrofit.create(HttpBinAPI::class.java)
     }
 
+//    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
         setUpUi()
     }
 
