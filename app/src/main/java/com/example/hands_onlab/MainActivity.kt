@@ -5,7 +5,7 @@ import android.text.method.ScrollingMovementMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.hands_onlab.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,9 +17,11 @@ import kotlin.coroutines.CoroutineContext
 
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
+    private lateinit var binding: ActivityMainBinding
     private var job: Job = Job()
+
     override val coroutineContext: CoroutineContext
-    get() = Dispatchers.Main + job
+        get() = Dispatchers.Main + job
 
     val service: HttpBinAPI by lazy {
         val retrofit = Retrofit.Builder()
@@ -35,19 +37,23 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setUpUi()
     }
 
     private fun setUpUi() {
         //set scrolling
-        responseText.movementMethod = ScrollingMovementMethod()
+        binding.responseText.movementMethod = ScrollingMovementMethod()
         // Button methods
-        getButton.setOnClickListener { launch { getButton() } }
-        postButton.setOnClickListener { launch { postButton() } }
-        putButton.setOnClickListener { launch { putButton() } }
-        deleteButton.setOnClickListener { launch { deleteButton() } }
-        downloadButton.setOnClickListener { launch { downloadButton() } }
-        errorButton.setOnClickListener { launch { errorButton() } }
+        binding.getButton.setOnClickListener { launch { getButton() } }
+        binding.postButton.setOnClickListener { launch { postButton() } }
+        binding.putButton.setOnClickListener { launch { putButton() } }
+        binding.deleteButton.setOnClickListener { launch { deleteButton() } }
+        binding.downloadButton.setOnClickListener { launch { downloadButton() } }
+        binding.errorButton.setOnClickListener { launch { errorButton() } }
     }
 
     override fun onDestroy() {
@@ -55,39 +61,40 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         job.cancel()
     }
 
-    private suspend fun getButton(){
+    private suspend fun getButton() {
         val response = service.getButton().await()
-        responseText.text = "Get Response : \n${response.body()}"
+        binding.responseText.text = "Get Response : \n${response.body()}"
         Toast.makeText(this, "Get Button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    private suspend fun postButton(){
+    private suspend fun postButton() {
         val response = service.postButton(body = PostBody()).await()
-        responseText.text = "Post Response :\n${response.body()}"
+        binding.responseText.text = "Post Response :\n${response.body()}"
         Toast.makeText(this, "Post Button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    private suspend fun putButton(){
-        val response = service.putButton(body = PostBody(name = "larry",job = "bobo")).await()
-        responseText.text = "Put Response :\n${response.body()}"
+    private suspend fun putButton() {
+        val response = service.putButton(body = PostBody(name = "larry", job = "bobo")).await()
+        binding.responseText.text = "Put Response :\n${response.body()}"
         Toast.makeText(this, "Put Button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    private suspend fun deleteButton(){
+    private suspend fun deleteButton() {
         val response = service.deleteButton().await()
-        responseText.text = "Delete Response :\n${response.body()}"
+        binding.responseText.text = "Delete Response :\n${response.body()}"
         Toast.makeText(this, "Delete Button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    private suspend fun downloadButton(){
+    private suspend fun downloadButton() {
         val response = service.downloadButton().await()
-        responseText.text = "Download Response :\n${response.body()}"
+        binding.responseText.text = "Download Response :\n${response.body()}"
         Toast.makeText(this, "Download Button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    private suspend fun errorButton(){
+    private suspend fun errorButton() {
         val response = service.errorButton().await()
-        responseText.text = "Error Response : \n${response.errorBody()?.string() ?: "there is no errorBody string"}"
+        binding.responseText.text =
+            "Error Response : \n${response.errorBody()?.string() ?: "there is no errorBody string"}"
         Toast.makeText(this, "Error Button clicked", Toast.LENGTH_SHORT).show()
 
         val num1 = 0
@@ -97,7 +104,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             val result = num2 / num1
 
         } catch (e: Exception) {
-            val attributesMap = mapOf<String, Any>(Pair("num1",num1),Pair("num2",num2))
+            val attributesMap = mapOf<String, Any>(Pair("num1", num1), Pair("num2", num2))
             Toast.makeText(this, "num1: " + num1 + " num2: " + num2, Toast.LENGTH_SHORT).show()
         }
     }
